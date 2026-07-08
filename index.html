@@ -1,135 +1,191 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Para Ti ❤️</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #ff6b9d, #c06c84, #6c5b7b);
-    font-family: 'Georgia', serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow-x: hidden;
-    color: white;
-  }
-  .container {
-    text-align: center;
-    padding: 30px;
-    max-width: 700px;
-    z-index: 1;
-  }
-  h1 {
-    font-size: 3em;
-    margin-bottom: 20px;
-    animation: latido 1.5s infinite;
-  }
-  @keyframes latido {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-  }
-  .mensaje {
-    font-size: 1.3em;
-    line-height: 1.8;
-    margin: 20px 0;
-    background: rgba(255,255,255,0.15);
-    padding: 25px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-  }
-  .razones {
-    text-align: left;
-    margin: 30px auto;
-  }
-  .razon {
-    background: rgba(255,255,255,0.1);
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 15px;
-    border-left: 4px solid #ff4081;
-    transition: transform 0.3s;
-  }
-  .razon:hover {
-    transform: translateX(10px);
-  }
-  .corazon {
-    position: fixed;
-    color: rgba(255,255,255,0.7);
-    animation: flotar 6s linear infinite;
-    font-size: 20px;
-  }
-  @keyframes flotar {
-    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-  }
-  .contador {
-    font-size: 1.5em;
-    margin: 20px 0;
-    padding: 20px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 15px;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nuestro Pequeño Mundo ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Loader -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="loader-hearts">
+                <span>❤</span><span>❤</span><span>❤</span>
+            </div>
+            <h1 class="loader-title">Nuestro Pequeño Mundo</h1>
+            <p class="loader-message" id="loaderMessage">Preparando algo especial para ti...</p>
+            <div class="loader-bar-container">
+                <div class="loader-bar" id="loaderBar"></div>
+            </div>
+            <p class="loader-percent" id="loaderPercent">0%</p>
+        </div>
+    </div>
 
-<div class="container">
-  <h1>❤️ Para Ti, Mi Amor ❤️</h1>
-  
-  <div class="mensaje">
-    Desde que llegaste a mi vida, todo tiene más color, más sentido y más amor. 
-    Esta página es para recordarte lo especial que eres para mí.
-  </div>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
 
-  <div class="contador" id="contador">
-    Llevamos juntos ❤️
-  </div>
+    <!-- Floating Particles -->
+    <canvas id="particlesCanvas"></canvas>
 
-  <h2 style="margin-top:30px;">💖 Razones por las que te amo:</h2>
-  <div class="razones">
-    <div class="razon">🌹 Tu sonrisa ilumina mis días</div>
-    <div class="razon">🌹 Me haces mejor persona</div>
-    <div class="razon">🌹 Contigo todo es divertido</div>
-    <div class="razon">🌹 Tu risa es mi sonido favorito</div>
-    <div class="razon">🌹 Eres mi lugar seguro</div>
-    <div class="razon">🌹 Simplemente, eres tú 💕</div>
-  </div>
+    <!-- Ambient Lights -->
+    <div class="ambient-lights">
+        <div class="light light-1"></div>
+        <div class="light light-2"></div>
+        <div class="light light-3"></div>
+    </div>
 
-  <div class="mensaje" style="margin-top:30px;">
-    <strong>Te amo más de lo que las palabras pueden expresar.</strong><br>
-    — Con amor, [Tu nombre] 💌
-  </div>
-</div>
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="welcome-screen hidden">
+        <div class="welcome-content">
+            <div class="welcome-hearts">❤</div>
+            <h1 class="welcome-title">Nuestro Pequeño Mundo</h1>
+            <p class="welcome-subtitle">Una experiencia creada con todo mi amor para ti</p>
+            <button class="welcome-btn" id="startBtn">
+                <span>Comenzar nuestra historia</span>
+                <div class="btn-glow"></div>
+            </button>
+        </div>
+    </div>
 
-<script>
-// Corazones flotando
-function crearCorazon() {
-  const corazon = document.createElement('div');
-  corazon.className = 'corazon';
-  corazon.innerHTML = '❤️';
-  corazon.style.left = Math.random() * 100 + 'vw';
-  corazon.style.animationDuration = (Math.random() * 3 + 3) + 's';
-  document.body.appendChild(corazon);
-  setTimeout(() => corazon.remove(), 6000);
-}
-setInterval(crearCorazon, 300);
+    <!-- Music Player -->
+    <div class="music-player hidden" id="musicPlayer">
+        <div class="music-visualizer" id="musicVisualizer">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="music-info">
+            <p class="music-title" id="musicTitle">Nuestra Canción</p>
+            <p class="music-artist">Con todo mi amor</p>
+        </div>
+        <div class="music-controls">
+            <button class="music-btn" id="playBtn">▶</button>
+            <button class="music-btn" id="volumeBtn">🔊</button>
+        </div>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
+    </div>
 
-// Contador de tiempo juntos
-// 👇 CAMBIA ESTA FECHA por la de cuando empezaron 💑
-const fechaInicio = new Date('2023-02-14'); 
-function actualizarContador() {
-  const hoy = new Date();
-  const diff = hoy - fechaInicio;
-  const dias = Math.floor(diff / (1000*60*60*24));
-  const horas = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-  const minutos = Math.floor((diff % (1000*60*60)) / (1000*60));
-  document.getElementById('contador').innerHTML = 
-    `Llevamos juntos ❤️<br><strong>${dias} días, ${horas} horas, ${minutos} minutos</strong>`;
-}
-actualizarContador();
-setInterval(actualizarContador, 60000);
-</script>
+    <!-- Navigation -->
+    <nav class="navigation hidden" id="navigation">
+        <ul>
+            <li><a href="#inicio" class="nav-link active" data-section="inicio">Inicio</a></li>
+            <li><a href="#corazon" class="nav-link" data-section="corazon">Corazón</a></li>
+            <li><a href="#galeria" class="nav-link" data-section="galeria">Galería</a></li>
+            <li><a href="#carta" class="nav-link" data-section="carta">Carta</a></li>
+        </ul>
+        <div class="nav-indicator" id="navIndicator"></div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="mainContent" class="hidden">
+        <!-- Inicio Section -->
+        <section id="inicio" class="section section-inicio">
+            <div class="hero-content">
+                <h1 class="hero-title">Nuestro Pequeño Mundo</h1>
+                <p class="hero-message">Cada momento a tu lado es un tesoro que guardo en mi corazón</p>
+                
+                <div class="counter-container">
+                    <h2 class="counter-title">Nuestro tiempo juntos</h2>
+                    <div class="counter-grid">
+                        <div class="counter-item">
+                            <span class="counter-value" id="years">0</span>
+                            <span class="counter-label">Años</span>
+                        </div>
+                        <div class="counter-item">
+                            <span class="counter-value" id="months">0</span>
+                            <span class="counter-label">Meses</span>
+                        </div>
+                        <div class="counter-item">
+                            <span class="counter-value" id="days">0</span>
+                            <span class="counter-label">Días</span>
+                        </div>
+                        <div class="counter-item">
+                            <span class="counter-value" id="hours">0</span>
+                            <span class="counter-label">Horas</span>
+                        </div>
+                        <div class="counter-item">
+                            <span class="counter-value" id="minutes">0</span>
+                            <span class="counter-label">Minutos</span>
+                        </div>
+                        <div class="counter-item">
+                            <span class="counter-value" id="seconds">0</span>
+                            <span class="counter-label">Segundos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroll-indicator">
+                    <span>Desliza para descubrir más</span>
+                    <div class="scroll-arrow">↓</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Corazón Section -->
+        <section id="corazon" class="section section-corazon">
+            <div class="corazon-content">
+                <h2 class="section-title">Nuestro Corazón</h2>
+                <p class="section-subtitle">El latido que nos mantiene vivos</p>
+                
+                <div class="heart-container" id="heartContainer">
+                    <div class="heart-glow"></div>
+                    <div class="heart" id="mainHeart">
+                        <svg viewBox="0 0 32 29.6">
+                            <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4 c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+                        </svg>
+                    </div>
+                    <div class="heart-particles" id="heartParticles"></div>
+                </div>
+
+                <p class="heart-message">Este corazón late por ti, solo por ti</p>
+            </div>
+        </section>
+
+        <!-- Galería Section -->
+        <section id="galeria" class="section section-galeria">
+            <h2 class="section-title">Nuestros Momentos</h2>
+            <p class="section-subtitle">Recuerdos que guardo con el alma</p>
+            
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Las fotos se generan con JavaScript -->
+            </div>
+        </section>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox">
+            <button class="lightbox-close" id="lightboxClose">×</button>
+            <button class="lightbox-prev" id="lightboxPrev">‹</button>
+            <button class="lightbox-next" id="lightboxNext">›</button>
+            <div class="lightbox-content">
+                <img id="lightboxImg" src="" alt="">
+                <div class="lightbox-info">
+                    <h3 id="lightboxTitle"></h3>
+                    <p id="lightboxDate"></p>
+                    <p id="lightboxDescription"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carta Section -->
+        <section id="carta" class="section section-carta">
+            <h2 class="section-title">Una Carta Para Ti</h2>
+            <div class="letter-container">
+                <div class="letter">
+                    <div class="letter-content" id="letterContent">
+                        <!-- La carta se escribe con JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Audio element -->
+    <audio id="bgMusic" loop>
+        <!-- Puedes cambiar esta URL por tu canción favorita -->
+        <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4d3c1e4c5c.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
 </body>
 </html>
