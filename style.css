@@ -1,5 +1,5 @@
 /* ============================================
-   NUESTRO PEQUEÑO MUNDO - ESTILOS PREMIUM v2.0
+   NUESTRO PEQUEÑO MUNDO - ESTILOS PREMIUM v2.1
    Para Alisson - Con todo mi amor
    ============================================ */
 
@@ -71,7 +71,7 @@ body::before {
 }
 
 /* ============================================
-   LOADER - ROSA ENCANTADA
+   LOADER - CORAZÓN LATIENDO
    ============================================ */
 
 .loader {
@@ -96,74 +96,25 @@ body::before {
     z-index: 2;
 }
 
-.enchanted-rose {
-    position: relative;
-    width: 150px;
-    height: 200px;
+.loader-heart {
+    width: 120px;
+    height: 120px;
     margin: 0 auto 40px;
-    animation: float 3s ease-in-out infinite;
+    animation: heartBeat 1.2s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(255, 107, 157, 0.8));
 }
 
-.rose {
-    position: relative;
+.loader-heart svg {
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    fill: url(#heartGradient);
 }
 
-.rose-petal {
-    position: absolute;
-    width: 50px;
-    height: 80px;
-    background: linear-gradient(180deg, #ff6b9d 0%, #e74c3c 100%);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    top: 30px;
-    left: 50%;
-    transform-origin: bottom center;
-    box-shadow: inset 0 0 20px rgba(255,255,255,0.3);
-}
-
-.rose-petal:nth-child(1) { transform: translateX(-50%) rotate(0deg); }
-.rose-petal:nth-child(2) { transform: translateX(-50%) rotate(72deg); }
-.rose-petal:nth-child(3) { transform: translateX(-50%) rotate(144deg); }
-.rose-petal:nth-child(4) { transform: translateX(-50%) rotate(216deg); }
-.rose-petal:nth-child(5) { transform: translateX(-50%) rotate(288deg); }
-
-.rose-center {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background: radial-gradient(circle, #d4af37 0%, #8e3b5c 100%);
-    border-radius: 50%;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
-    animation: centerGlow 2s ease-in-out infinite;
-}
-
-@keyframes centerGlow {
-    0%, 100% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
-    50% { box-shadow: 0 0 50px rgba(212, 175, 55, 1); }
-}
-
-.rose-glass {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 100px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-radius: 0 0 40px 40px;
-    background: rgba(255,255,255,0.05);
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.15); }
+    50% { transform: scale(0.95); }
+    75% { transform: scale(1.1); }
 }
 
 .loader-title {
@@ -295,26 +246,17 @@ body::before {
 }
 
 .aurora-1 {
-    background: linear-gradient(45deg, 
-        transparent 30%, 
-        rgba(255, 107, 157, 0.5) 50%, 
-        transparent 70%);
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 107, 157, 0.5) 50%, transparent 70%);
     animation: auroraMove 20s linear infinite;
 }
 
 .aurora-2 {
-    background: linear-gradient(-45deg, 
-        transparent 30%, 
-        rgba(155, 89, 182, 0.4) 50%, 
-        transparent 70%);
+    background: linear-gradient(-45deg, transparent 30%, rgba(155, 89, 182, 0.4) 50%, transparent 70%);
     animation: auroraMove 25s linear infinite reverse;
 }
 
 .aurora-3 {
-    background: linear-gradient(90deg, 
-        transparent 30%, 
-        rgba(231, 76, 60, 0.3) 50%, 
-        transparent 70%);
+    background: linear-gradient(90deg, transparent 30%, rgba(231, 76, 60, 0.3) 50%, transparent 70%);
     animation: auroraMove 30s linear infinite;
 }
 
@@ -1072,101 +1014,73 @@ body::before {
 }
 
 /* ============================================
-   HEART SECTION
+   ❤️ CORAZÓN ANIMADO - SECCIÓN PRINCIPAL
    ============================================ */
 
 .heart-container {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     margin: 50px auto;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.enchanted-rose-main {
+.heart-main {
     position: relative;
-    width: 200px;
-    height: 200px;
-    animation: heartBeatMain 1.5s ease-in-out infinite;
-    filter: drop-shadow(0 0 40px rgba(255, 107, 157, 0.7));
+    width: 180px;
+    height: 180px;
+    z-index: 10;
+    animation: heartBeatMain 1.2s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(255, 107, 157, 0.8));
+    transition: transform 0.3s;
 }
 
-.rose-main {
-    position: relative;
+.heart-main svg {
     width: 100%;
     height: 100%;
 }
 
-.rose-petal-main {
-    position: absolute;
-    width: 70px;
-    height: 110px;
-    background: linear-gradient(180deg, #ff6b9d 0%, #e74c3c 50%, #8e3b5c 100%);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    top: 30px;
-    left: 50%;
-    transform-origin: bottom center;
-    box-shadow: inset 0 0 25px rgba(255,255,255,0.4);
+@keyframes heartBeatMain {
+    0%, 100% { transform: scale(1); }
+    10% { transform: scale(1.15); }
+    20% { transform: scale(1); }
+    30% { transform: scale(1.12); }
+    40% { transform: scale(1); }
 }
 
-.rose-petal-main:nth-child(1) { transform: translateX(-50%) rotate(0deg); }
-.rose-petal-main:nth-child(2) { transform: translateX(-50%) rotate(72deg); }
-.rose-petal-main:nth-child(3) { transform: translateX(-50%) rotate(144deg); }
-.rose-petal-main:nth-child(4) { transform: translateX(-50%) rotate(216deg); }
-.rose-petal-main:nth-child(5) { transform: translateX(-50%) rotate(288deg); }
-
-.rose-center-main {
+/* ONDAS EXPANSIVAS */
+.heart-wave {
     position: absolute;
-    width: 50px;
-    height: 50px;
-    background: radial-gradient(circle, #ffd700 0%, #d4af37 50%, #8e3b5c 100%);
-    border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
-    animation: centerPulse 1.5s ease-in-out infinite;
-}
-
-@keyframes centerPulse {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.2); }
-}
-
-.rose-glow {
-    position: absolute;
-    inset: -50px;
-    background: radial-gradient(circle, rgba(255, 107, 157, 0.4) 0%, transparent 70%);
+    width: 180px;
+    height: 180px;
+    border: 2px solid var(--primary-pink);
     border-radius: 50%;
-    animation: pulseGlow 1.5s ease-in-out infinite;
-    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
 }
 
-@keyframes heartBeatMain {
-    0%, 100% { transform: scale(1); }
-    25% { transform: scale(1.1); }
-    50% { transform: scale(0.95); }
-    75% { transform: scale(1.05); }
+.heart-wave.active {
+    animation: waveExpand 1.2s ease-out;
 }
 
-@keyframes pulseGlow {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.5); opacity: 0.8; }
-}
-
-.heart-glow {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle, rgba(255, 107, 157, 0.3) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: heartGlow 2s ease-in-out infinite;
-}
-
-@keyframes heartGlow {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.3); opacity: 0.8; }
+@keyframes waveExpand {
+    0% {
+        width: 180px;
+        height: 180px;
+        opacity: 0.8;
+        border-width: 3px;
+    }
+    100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+        border-width: 1px;
+    }
 }
 
 .heart-particles {
@@ -1201,6 +1115,15 @@ body::before {
     color: var(--soft-pink);
     text-align: center;
     margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .heart-container { width: 300px; height: 300px; }
+    .heart-main { width: 130px; height: 130px; }
+    @keyframes waveExpand {
+        0% { width: 130px; height: 130px; opacity: 0.8; border-width: 3px; }
+        100% { width: 350px; height: 350px; opacity: 0; border-width: 1px; }
+    }
 }
 
 /* ============================================
@@ -1508,7 +1431,6 @@ body::before {
 
 .reason-text {
     color: var(--text-primary);
-    font-size: 1.1rem;
     line-height: 1.5;
     font-family: 'Dancing Script', cursive;
     font-size: 1.3rem;
