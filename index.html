@@ -79,14 +79,12 @@
             <span></span><span></span><span></span><span></span><span></span>
         </div>
         <div class="music-info">
-            <p class="music-title" id="musicTitle">Colgando en tus manos</p>
+            <p class="music-title">Colgando en tus manos</p>
             <p class="music-artist">Carlos Baute & Marta Sánchez</p>
         </div>
         <div class="music-controls">
             <button class="music-btn" id="playBtn">▶</button>
-            <button class="music-btn" id="volumeBtn">🔊</button>
         </div>
-        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
     </div>
 
     <!-- NAVIGATION -->
@@ -247,17 +245,9 @@
                                 <stop offset="50%" id="grad2" stop-color="#e74c3c"/>
                                 <stop offset="100%" id="grad3" stop-color="#ff6b9d"/>
                             </linearGradient>
-                            <filter id="heartGlow">
-                                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                                <feMerge>
-                                    <feMergeNode in="coloredBlur"/>
-                                    <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
-                            </filter>
                         </defs>
                         <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4 c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" 
-                              fill="url(#heartGradient)" 
-                              filter="url(#heartGlow)"/>
+                              fill="url(#heartGradient)"/>
                     </svg>
                 </div>
                 <div class="heart-particles" id="heartParticles"></div>
@@ -283,7 +273,6 @@
                 <img id="lightboxImg" src="" alt="">
                 <div class="lightbox-info">
                     <h3 id="lightboxTitle"></h3>
-                    <p id="lightboxDate"></p>
                     <p id="lightboxDescription"></p>
                 </div>
             </div>
@@ -393,8 +382,10 @@
         </div>
     </div>
 
-    <!-- AUDIO -->
-    <iframe id="soundcloudPlayer" width="0" height="0" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/dylan-mora-976267280/theme%3Fsi%3Db5641de0fdc54e25a583fc6a9e0338a0&color=%23ff6b9d&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
+    <!-- 🎵 REPRODUCTOR DE SOUNDCLOUD OCULTO -->
+    <iframe id="soundcloudPlayer" width="0" height="0" scrolling="no" frameborder="no" allow="autoplay" 
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/dylan-mora-976267280/theme%3Fsi%3Db5641de0fdc54e25a583fc6a9e0338a0&color=%23ff6b9d&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
+    </iframe>
 
     <script src="script.js"></script>
 </body>
