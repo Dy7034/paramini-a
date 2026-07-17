@@ -3,394 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Para Alisson ❤️ Nuestro Pequeño Mundo</title>
+    <title>Para Alisson ❤️</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- LOADER -->
-    <div id="loader" class="loader">
+    <div id="loader">
         <div class="loader-content">
             <div class="loader-heart">
-                <svg viewBox="0 0 32 29.6">
-                    <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4 c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
-                </svg>
+                <svg viewBox="0 0 32 29.6"><path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4 c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/></svg>
             </div>
-            <h1 class="loader-title">Para Alisson</h1>
-            <p class="loader-subtitle">Mi niña, mi amor, mi vida</p>
-            <p class="loader-message" id="loaderMessage">Preparando algo mágico para ti...</p>
-            <div class="loader-bar-container">
-                <div class="loader-bar" id="loaderBar"></div>
-            </div>
-            <p class="loader-percent" id="loaderPercent">0%</p>
+            <h1>Para Alisson</h1>
+            <p>Mi niña, mi amor, mi vida</p>
+            <p class="loader-msg" id="loaderMsg">Preparando algo mágico...</p>
+            <div class="loader-bar"><div id="loaderFill"></div></div>
         </div>
     </div>
 
+    <!-- CURSOR -->
     <div class="cursor" id="cursor"></div>
     <div class="cursor-follower" id="cursorFollower"></div>
     <canvas id="particlesCanvas"></canvas>
-    <div class="aurora">
-        <div class="aurora-layer aurora-1"></div>
-        <div class="aurora-layer aurora-2"></div>
-        <div class="aurora-layer aurora-3"></div>
-    </div>
-    <div class="petals-container" id="petalsContainer"></div>
-    <div class="ambient-lights">
-        <div class="light light-1"></div>
-        <div class="light light-2"></div>
-        <div class="light light-3"></div>
-        <div class="light light-4"></div>
-    </div>
-    <div class="butterflies-container" id="butterfliesContainer"></div>
 
     <!-- WELCOME -->
-    <div id="welcomeScreen" class="welcome-screen hidden">
-        <div class="welcome-content">
-            <div class="disney-castle">
-                <div class="castle-main"></div>
-                <div class="castle-tower castle-tower-left"></div>
-                <div class="castle-tower castle-tower-right"></div>
-                <div class="castle-flag"></div>
+    <div id="welcome" class="hidden">
+        <div class="welcome-box">
+            <div class="castle">
+                <div class="tower t1"></div>
+                <div class="tower t2"></div>
+                <div class="main"></div>
+                <div class="flag"></div>
             </div>
-            <h1 class="welcome-title">Nuestro Pequeño Mundo</h1>
-            <p class="welcome-subtitle">Una historia creada con todo mi amor<br>para ti, Alisson</p>
-            <div class="kuromi-decoration">🎀</div>
-            <button class="welcome-btn" id="startBtn">
-                <span>Comenzar nuestra historia</span>
-                <div class="btn-glow"></div>
-            </button>
+            <h1>Nuestro Pequeño Mundo</h1>
+            <p>Una historia para ti, Alisson</p>
+            <button id="startBtn">Comenzar</button>
         </div>
     </div>
 
     <!-- BOTÓN MENÚ -->
-    <button class="nav-toggle" id="navToggle" title="Menú">
+    <button id="menuBtn" title="Menú">
         <span></span>
         <span></span>
         <span></span>
     </button>
 
     <!-- MENÚ -->
-    <nav class="navigation" id="navigation">
-        <ul>
-            <li><a href="#inicio" class="nav-link active" data-section="inicio">🏰 Inicio</a></li>
-            <li><a href="#tiempo" class="nav-link" data-section="tiempo">⏰ Tiempo</a></li>
-            <li><a href="#historia" class="nav-link" data-section="historia">📖 Historia</a></li>
-            <li><a href="#corazon" class="nav-link" data-section="corazon">💖 Corazón</a></li>
-            <li><a href="#galeria" class="nav-link" data-section="galeria">🖼️ Galería</a></li>
-            <li><a href="#carta" class="nav-link" data-section="carta">✉️ Carta</a></li>
-            <li><a href="#razones" class="nav-link" data-section="razones">🌹 Razones</a></li>
-            <li><a href="#sueños" class="nav-link" data-section="sueños">🦷 Sueños</a></li>
-            <li><a href="#constelacion" class="nav-link" data-section="constelacion">🌟 Estrellas</a></li>
-            <li><a href="#cumple" class="nav-link" data-section="cumple">🎂 Tu Día</a></li>
-            <li><a href="#futuro" class="nav-link" data-section="futuro">💌 Futuro</a></li>
-            <li><a href="#promesas" class="nav-link" data-section="promesas">💍 Promesas</a></li>
-            <li><a href="#sorpresa" class="nav-link" data-section="sorpresa">🎁 Sorpresa</a></li>
-        </ul>
+    <nav id="menu">
+        <a href="#inicio" data-sec="inicio">🏰 Inicio</a>
+        <a href="#tiempo" data-sec="tiempo">⏰ Tiempo</a>
+        <a href="#historia" data-sec="historia">📖 Historia</a>
+        <a href="#corazon" data-sec="corazon">💖 Corazón</a>
+        <a href="#galeria" data-sec="galeria">🖼️ Galería</a>
+        <a href="#carta" data-sec="carta">✉️ Carta</a>
+        <a href="#razones" data-sec="razones">🌹 Razones</a>
+        <a href="#sueños" data-sec="sueños">🦷 Sueños</a>
+        <a href="#estrellas" data-sec="estrellas">🌟 Estrellas</a>
+        <a href="#cumple" data-sec="cumple">🎂 Tu Día</a>
+        <a href="#futuro" data-sec="futuro">💌 Futuro</a>
+        <a href="#promesas" data-sec="promesas">💍 Promesas</a>
+        <a href="#sorpresa" data-sec="sorpresa">🎁 Sorpresa</a>
     </nav>
 
-    <!-- MUSIC PLAYER -->
-    <div class="music-player hidden" id="musicPlayer">
-        <div class="music-visualizer" id="musicVisualizer">
-            <span></span><span></span><span></span><span></span><span></span>
-        </div>
+    <!-- MUSIC -->
+    <div id="musicPlayer" class="hidden">
+        <div class="visualizer"><span></span><span></span><span></span><span></span><span></span></div>
         <div class="music-info">
             <p class="music-title">Calm Romantic</p>
-            <p class="music-artist">The_Mountain</p>
         </div>
-        <div class="music-controls">
-            <button class="music-btn" id="playBtn" title="Play/Pause">▶</button>
-            <button class="music-btn" id="volumeBtn" title="Volumen">🔊</button>
-        </div>
+        <button id="playBtn">▶</button>
+        <button id="volBtn">🔊</button>
     </div>
 
-    <div class="scroll-progress" id="scrollProgress"></div>
+    <!-- CONTENIDO -->
+    <main id="main" class="hidden">
 
-    <!-- MAIN -->
-    <main id="mainContent" class="hidden">
-        
-        <section id="inicio" class="section section-inicio">
-            <div class="hero-content">
-                <div class="kuromi-corner">🎀</div>
-                <h1 class="hero-title">Alisson</h1>
-                <p class="hero-message">Mi niña, mi amor, mi vida<br>Bienvenida a nuestro pequeño mundo</p>
-                <p class="hero-date">12 de Abril, 2026 — El día que comenzó todo</p>
-                <div class="scroll-indicator">
-                    <span>Desliza para descubrir nuestra historia</span>
-                    <div class="scroll-arrow">↓</div>
-                </div>
+        <section id="inicio" class="sec">
+            <div class="hero">
+                <div class="kuro">🎀</div>
+                <h1>Alisson</h1>
+                <p class="msg">Mi niña, mi amor, mi vida<br>Bienvenida a nuestro mundo</p>
+                <p class="date">12 de Abril, 2026 — El día que comenzó todo</p>
+                <p class="scroll-hint">↓ Desliza ↓</p>
             </div>
         </section>
 
-        <section id="tiempo" class="section section-tiempo">
-            <h2 class="section-title">Nuestro Tiempo Juntos</h2>
-            <p class="section-subtitle">Cada segundo a tu lado es un tesoro</p>
-            <div class="counter-container glass">
-                <h3 class="counter-title">Desde el 12 de Abril, 2026</h3>
+        <section id="tiempo" class="sec sec-tiempo">
+            <h2 class="title">Nuestro Tiempo Juntos</h2>
+            <p class="subtitle">Cada segundo a tu lado es un tesoro</p>
+            <div class="counter-box">
+                <h3>Desde el 12 de Abril, 2026</h3>
                 <div class="counter-grid">
-                    <div class="counter-item"><span class="counter-value" id="years">0</span><span class="counter-label">Años</span></div>
-                    <div class="counter-item"><span class="counter-value" id="months">0</span><span class="counter-label">Meses</span></div>
-                    <div class="counter-item"><span class="counter-value" id="days">0</span><span class="counter-label">Días</span></div>
-                    <div class="counter-item"><span class="counter-value" id="hours">0</span><span class="counter-label">Horas</span></div>
-                    <div class="counter-item"><span class="counter-value" id="minutes">0</span><span class="counter-label">Minutos</span></div>
-                    <div class="counter-item"><span class="counter-value" id="seconds">0</span><span class="counter-label">Segundos</span></div>
+                    <div class="c-item"><span id="years">0</span><label>Años</label></div>
+                    <div class="c-item"><span id="months">0</span><label>Meses</label></div>
+                    <div class="c-item"><span id="days">0</span><label>Días</label></div>
+                    <div class="c-item"><span id="hours">0</span><label>Horas</label></div>
+                    <div class="c-item"><span id="minutes">0</span><label>Minutos</label></div>
+                    <div class="c-item"><span id="seconds">0</span><label>Segundos</label></div>
                 </div>
             </div>
         </section>
 
-        <section id="historia" class="section section-historia">
-            <h2 class="section-title">Nuestra Historia</h2>
-            <p class="section-subtitle">Un cuento de hadas hecho realidad</p>
-            <div class="story-timeline">
-                <div class="story-item">
-                    <div class="story-icon">💫</div>
-                    <div class="story-content glass">
-                        <h3>2023 - El Comienzo</h3>
-                        <p>Cuando hablamos por primera vez gracias a Masha. Sin saberlo, acababa de encontrar a la persona que cambiaría mi vida para siempre.</p>
-                    </div>
+        <section id="historia" class="sec">
+            <h2 class="title">Nuestra Historia</h2>
+            <p class="subtitle">Un cuento de hadas hecho realidad</p>
+            <div class="timeline">
+                <div class="t-item">
+                    <div class="t-icon">💫</div>
+                    <div class="t-content"><h3>2023 - El Comienzo</h3><p>Cuando hablamos por primera vez gracias a Masha. Sin saberlo, encontraría a la persona que cambiaría mi vida.</p></div>
                 </div>
-                <div class="story-item">
-                    <div class="story-icon">💃</div>
-                    <div class="story-content glass">
-                        <h3>Los 15 de Tu Prima</h3>
-                        <p>Me invitaron como chambelán y tú estabas ahí. Yo no sabía bailar casi nada, pero todo era más fácil cuando estaba contigo.</p>
-                    </div>
+                <div class="t-item">
+                    <div class="t-icon">💃</div>
+                    <div class="t-content"><h3>Los 15 de Tu Prima</h3><p>Me invitaron como chambelán y tú estabas ahí. Yo no sabía bailar, pero todo era más fácil contigo.</p></div>
                 </div>
-                <div class="story-item">
-                    <div class="story-icon">👀</div>
-                    <div class="story-content glass">
-                        <h3>Cuando te vi por primera vez</h3>
-                        <p>Pensé que eras una muchacha muy bonita. Te veías un poco introvertida y lo único que quería era conocerte más.</p>
-                    </div>
+                <div class="t-item">
+                    <div class="t-icon">👀</div>
+                    <div class="t-content"><h3>Cuando te vi por primera vez</h3><p>Pensé que eras muy bonita. Lo único que quería era conocerte más.</p></div>
                 </div>
-                <div class="story-item">
-                    <div class="story-icon">💘</div>
-                    <div class="story-content glass">
-                        <h3>El Día que Cambió Todo</h3>
-                        <p>Domingo 12 de Abril, 2026. El día que te pedí que fueras mi novia. Encontré a la persona con la que quiero compartir cada uno de mis días.</p>
-                    </div>
+                <div class="t-item">
+                    <div class="t-icon">💘</div>
+                    <div class="t-content"><h3>El Día que Cambió Todo</h3><p>Domingo 12 de Abril, 2026. El día que te pedí que fueras mi novia.</p></div>
                 </div>
-                <div class="story-item">
-                    <div class="story-icon">💕</div>
-                    <div class="story-content glass">
-                        <h3>Hoy - Nuestro Presente</h3>
-                        <p>Cada día a tu lado es un regalo. Eres mi mejor elección, Chuky.</p>
-                    </div>
+                <div class="t-item">
+                    <div class="t-icon">💕</div>
+                    <div class="t-content"><h3>Hoy</h3><p>Cada día a tu lado es un regalo. Eres mi mejor elección, Chuky.</p></div>
                 </div>
             </div>
         </section>
 
-        <section id="corazon" class="section section-corazon">
-            <h2 class="section-title">Nuestro Corazón</h2>
-            <p class="section-subtitle">El latido que nos mantiene vivos</p>
-            <div class="heart-container" id="heartContainer">
-                <div class="ecg-line">
-                    <svg viewBox="0 0 200 50" preserveAspectRatio="none">
-                        <polyline id="ecgPath" points="0,25 50,25 60,10 70,40 80,5 90,45 100,25 150,25 160,15 170,35 180,25 200,25" 
-                                  fill="none" stroke="#ff6b9d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <div class="heart-main" id="mainHeart">
-                    <svg viewBox="0 0 32 29.6" id="heartSvg">
-                        <defs>
-                            <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" id="grad1" stop-color="#ff6b9d"/>
-                                <stop offset="50%" id="grad2" stop-color="#e74c3c"/>
-                                <stop offset="100%" id="grad3" stop-color="#ff6b9d"/>
-                            </linearGradient>
-                        </defs>
-                        <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4 c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" 
-                              fill="url(#heartGradient)"/>
-                    </svg>
-                </div>
-                <div class="heart-particles" id="heartParticles"></div>
-            </div>
-            <p class="heart-message">Este corazón late por ti, Alisson. Solo por ti. 💖</p>
-        </section>
-
-        <section id="galeria" class="section section-galeria">
-            <h2 class="section-title">Nuestros Momentos</h2>
-            <p class="section-subtitle">Recuerdos que guardo con el alma</p>
-            <div class="gallery-grid" id="galleryGrid"></div>
-        </section>
-
-        <div class="lightbox" id="lightbox">
-            <button class="lightbox-close" id="lightboxClose">×</button>
-            <button class="lightbox-prev" id="lightboxPrev">‹</button>
-            <button class="lightbox-next" id="lightboxNext">›</button>
-            <div class="lightbox-content">
-                <img id="lightboxImg" src="" alt="">
-                <div class="lightbox-info">
-                    <h3 id="lightboxTitle"></h3>
-                    <p id="lightboxDescription"></p>
+        <section id="corazon" class="sec sec-corazon">
+            <h2 class="title">Nuestro Corazón</h2>
+            <p class="subtitle">El latido que nos mantiene vivos</p>
+            <div class="heart-wrap" id="heartWrap">
+                <svg class="ecg" viewBox="0 0 200 50" preserveAspectRatio="none">
+                    <polyline id="ecgPath" points="0,25 50,25 60,10 70,40 80,5 90,45 100,25 150,25 160,15 170,35 180,25 200,25" fill="none" stroke="#ff6b9d" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div class="big-heart" id="bigHeart">
+                    <svg viewBox="0 0 32 29.6"><path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4 c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" fill="#ff6b9d"/></svg>
                 </div>
             </div>
+            <p class="heart-msg">Este corazón late por ti, Alisson. Solo por ti 💖</p>
+        </section>
+
+        <section id="galeria" class="sec">
+            <h2 class="title">Nuestros Momentos</h2>
+            <p class="subtitle">Recuerdos que guardo con el alma</p>
+            <div class="gallery" id="gallery"></div>
+        </section>
+
+        <div id="lightbox" class="hidden">
+            <button id="lbClose">×</button>
+            <button id="lbPrev">‹</button>
+            <button id="lbNext">›</button>
+            <img id="lbImg" src="" alt="">
         </div>
 
-        <section id="carta" class="section section-carta">
-            <h2 class="section-title">Una Carta Para Ti, Mi Niña</h2>
-            <p class="section-subtitle">Las palabras más importantes de mi corazón</p>
-            <div class="letter-container">
-                <div class="letter">
-                    <div class="letter-seal">💌</div>
-                    <div class="letter-content" id="letterContent"></div>
+        <section id="carta" class="sec sec-carta">
+            <h2 class="title">Una Carta Para Ti, Mi Niña</h2>
+            <p class="subtitle">Las palabras más importantes de mi corazón</p>
+            <div class="letter-box">
+                <div class="seal">💌</div>
+                <div id="letterContent"></div>
+            </div>
+        </section>
+
+        <section id="razones" class="sec">
+            <h2 class="title">100 Razones Para Amarte</h2>
+            <p class="subtitle">Y todavía me faltan más...</p>
+            <div class="reasons" id="reasons"></div>
+        </section>
+
+        <section id="sueños" class="sec">
+            <h2 class="title">Tus Sueños, Mis Sueños</h2>
+            <p class="subtitle">Construyendo nuestro futuro juntos</p>
+            <div class="dreams">
+                <div class="d-item"><span>🦷</span><h3>Odontóloga</h3><p>Mi niña va a ser una odontóloga increíble.</p></div>
+                <div class="d-item"><span>🎓</span><h3>2027 - Universidad</h3><p>El próximo año comienza tu camino. Estoy orgulloso de ti.</p></div>
+                <div class="d-item"><span>🏡</span><h3>Nuestro Hogar</h3><p>Algún día tendremos nuestro lugar, lleno de amor y queso.</p></div>
+                <div class="d-item"><span>✈️</span><h3>Aventuras</h3><p>Playas, montañas, todos los lugares juntos.</p></div>
+                <div class="d-item"><span>👨‍👩‍👧‍👦</span><h3>Nuestra Familia</h3><p>Ver correr a nuestros hijos por la casa.</p></div>
+                <div class="d-item"><span>👴👵</span><h3>Viejitos</h3><p>Reírnos de cualquier tontería juntos.</p></div>
+            </div>
+        </section>
+
+        <section id="estrellas" class="sec sec-estrellas">
+            <h2 class="title">Mis Deseos Para Ti</h2>
+            <p class="subtitle">Toca cada estrella para descubrir un deseo</p>
+            <div class="stars-wrap" id="starsWrap"></div>
+            <div class="wish-box" id="wishBox"><p>✨ Toca una estrella ✨</p></div>
+        </section>
+
+        <section id="cumple" class="sec sec-cumple">
+            <div class="bday">
+                <div class="cake">🎂</div>
+                <h1>¡Feliz Cumpleaños, Mi Amor!</h1>
+                <h2>Hoy celebro el día más bonito del año</h2>
+                <p>Hace 18 años llegó al mundo la mujer que cambiaría mi vida.<br>Aunque no te conocía aún, sé que ese día el universo sonrió.<br><br>Hoy celebro cada risa, cada momento, cada "Ti amo".<br>Gracias por llegar al mundo, Alisson.<br>Gracias por ser tú.</p>
+                <div class="wishes">
+                    <div>🌹 Que tus sueños se cumplan</div>
+                    <div>✨ Que nunca te falte salud</div>
+                    <div>💖 Que el amor nunca te falte</div>
+                    <div>🦷 Que seas la mejor odontóloga</div>
+                    <div>🌍 Que viajes a donde quieras</div>
+                    <div>😊 Que siempre seas feliz</div>
                 </div>
             </div>
         </section>
 
-        <section id="razones" class="section section-razones">
-            <h2 class="section-title">100 Razones Para Amarte</h2>
-            <p class="section-subtitle">Y todavía me faltan más...</p>
-            <div class="reasons-container" id="reasonsContainer"></div>
-        </section>
-
-        <section id="sueños" class="section section-suenos">
-            <h2 class="section-title">Tus Sueños, Mis Sueños</h2>
-            <p class="section-subtitle">Construyendo nuestro futuro juntos</p>
-            <div class="dreams-container glass">
-                <div class="dream-item"><div class="dream-icon">🦷</div><h3>Odontóloga</h3><p>Mi niña va a ser una odontóloga increíble. Voy a estar ahí en cada paso, celebrando cada logro como si fuera mío.</p></div>
-                <div class="dream-item"><div class="dream-icon">🎓</div><h3>2027 - Universidad</h3><p>El próximo año comienza tu camino hacia la universidad. Estoy tan orgulloso de ti.</p></div>
-                <div class="dream-item"><div class="dream-icon">🏡</div><h3>Nuestro Hogar</h3><p>Algún día tendremos nuestro lugar, lleno de amor, risas y queso.</p></div>
-                <div class="dream-item"><div class="dream-icon">✈️</div><h3>Aventuras Juntos</h3><p>Playas, montañas, todos los lugares que podamos.</p></div>
-                <div class="dream-item"><div class="dream-icon">👨‍👩‍👧‍👦</div><h3>Nuestra Familia</h3><p>Ver correr a nuestros hijos por la casa, enseñarles lo que significa amar de verdad.</p></div>
-                <div class="dream-item"><div class="dream-icon">👴🏻👵🏻</div><h3>Viejitos Juntos</h3><p>Reírnos de cualquier tontería, recordaremos estos momentos.</p></div>
-            </div>
-        </section>
-
-        <section id="constelacion" class="section section-constelacion">
-            <h2 class="section-title">Mis Deseos Para Ti</h2>
-            <p class="section-subtitle">Toca cada estrella para descubrir un deseo</p>
-            <div class="constellation" id="constellation"></div>
-            <div class="wish-display" id="wishDisplay">
-                <p class="wish-text">✨ Toca una estrella ✨</p>
-            </div>
-        </section>
-
-        <section id="cumple" class="section section-cumple">
-            <div class="birthday-special">
-                <div class="cake-container">
-                    <div class="cake">🎂</div>
-                    <div class="candles">
-                        <span class="candle"></span><span class="candle"></span><span class="candle"></span>
-                        <span class="candle"></span><span class="candle"></span><span class="candle"></span>
-                        <span class="candle"></span><span class="candle"></span><span class="candle"></span>
-                        <span class="candle"></span><span class="candle"></span><span class="candle"></span>
-                        <span class="candle"></span><span class="candle"></span><span class="candle"></span>
-                        <span class="candle"></span><span class="candle"></span><span class="candle"></span>
-                    </div>
-                </div>
-                <h1 class="birthday-title">¡Feliz Cumpleaños, Mi Amor!</h1>
-                <h2 class="birthday-subtitle">Hoy celebro el día más bonito del año</h2>
-                <p class="birthday-message">
-                    Hace 18 años llegó al mundo la mujer que cambiaría mi vida.<br>
-                    Aunque no te conocía aún, sé que ese día el universo sonrió,<br>
-                    porque estaba preparando a la persona más especial para mí.<br><br>
-                    Hoy no solo celebro tu nacimiento,<br>
-                    celebro cada risa, cada momento, cada "Ti amo".<br>
-                    Celebro que existas y que me permitas ser parte de tu vida.<br><br>
-                    <strong>Gracias por llegar al mundo, Alisson.</strong><br>
-                    <strong>Gracias por ser tú.</strong>
-                </p>
-                <div class="birthday-wishes">
-                    <div class="wish-item">🌹 Que todos tus sueños se cumplan</div>
-                    <div class="wish-item">✨ Que nunca te falte salud</div>
-                    <div class="wish-item">💖 Que el amor nunca te falte</div>
-                    <div class="wish-item">🦷 Que seas la mejor odontóloga</div>
-                    <div class="wish-item">🌍 Que viajes a donde quieras</div>
-                    <div class="wish-item">😊 Que siempre seas feliz</div>
-                </div>
-            </div>
-        </section>
-
-        <section id="futuro" class="section section-futuro">
-            <h2 class="section-title">Carta Sellada</h2>
-            <p class="section-subtitle">Un mensaje para tu próximo cumpleaños</p>
-            <div class="sealed-letter" id="sealedLetter">
+        <section id="futuro" class="sec sec-futuro">
+            <h2 class="title">Carta Sellada</h2>
+            <p class="subtitle">Un mensaje para tu próximo cumpleaños</p>
+            <div class="envelope-wrap" id="envelopeWrap">
                 <div class="envelope">
-                    <div class="envelope-flap"></div>
-                    <div class="envelope-body">
-                        <div class="seal">💌</div>
-                        <p class="envelope-text">Para: Alisson</p>
-                        <p class="envelope-text">De: Tu niño de silicona</p>
-                        <p class="envelope-text">26 de Agosto, 2027</p>
+                    <div class="env-flap"></div>
+                    <div class="env-body">
+                        <div class="env-seal">💌</div>
+                        <p>Para: Alisson</p>
+                        <p>De: Tu niño de silicona</p>
+                        <p>26 de Agosto, 2027</p>
                     </div>
                 </div>
-                <p class="sealed-instruction">📅 Esta carta se abrirá el 26 de Agosto del 2027</p>
-            </div>
-            <div class="future-letter-content hidden" id="futureLetterContent">
-                <div class="future-letter glass">
-                    <h3>Alisson, 19 años</h3>
-                    <p>Mi niña,</p>
-                    <p>Si estás leyendo esto, significa que ha pasado un año desde tu cumpleaños #18 y que sigues aquí, a mi lado.</p>
-                    <p>No importa cuándo leas esto, quiero que sepas que cada día a tu lado ha sido un regalo. Gracias por un año más de amarme.</p>
-                    <p>Espero que hayas cumplido muchos de tus sueños, especialmente el de convertirte en odontóloga.</p>
-                    <p>Te amo hoy, mañana y siempre.</p>
-                    <p class="future-signature">— Tu niño de silicona ❤️</p>
-                </div>
+                <p class="env-hint">📅 Se abrirá el 26 de Agosto del 2027</p>
             </div>
         </section>
 
-        <section id="promesas" class="section section-promesas">
-            <h2 class="section-title">Mis Promesas Para Ti</h2>
-            <p class="section-subtitle">Las promesas de un corazón que te ama</p>
-            <div class="promesas-container" id="promesasContainer">
-                <div class="promesa-card">
-                    <div class="promesa-number">1</div>
-                    <div class="promesa-text">Te prometo escucharte siempre, incluso cuando el mundo entero esté en contra tuya.</div>
-                </div>
-                <div class="promesa-card">
-                    <div class="promesa-number">2</div>
-                    <div class="promesa-text">Te prometo ser tu refugio en los días difíciles y tu compañero en los días felices.</div>
-                </div>
-                <div class="promesa-card">
-                    <div class="promesa-number">3</div>
-                    <div class="promesa-text">Te prometo que cuando seas odontóloga, seré tu primer paciente y el más orgulloso.</div>
-                </div>
-                <div class="promesa-card">
-                    <div class="promesa-number">4</div>
-                    <div class="promesa-text">Te prometo que en 50 años seguiré eligiéndote, cada día, como el primero.</div>
-                </div>
-                <div class="promesa-card">
-                    <div class="promesa-number">5</div>
-                    <div class="promesa-text">Te prometo que este amor que siento hoy será más fuerte mañana.</div>
-                </div>
-            </div>
+        <section id="promesas" class="sec sec-promesas">
+            <h2 class="title">Mis Promesas Para Ti</h2>
+            <p class="subtitle">Las promesas de un corazón que te ama</p>
+            <div class="promesas" id="promesas"></div>
         </section>
 
-        <section id="sorpresa" class="section section-sorpresa">
-            <div class="surprise-content">
-                <div class="birthday-cake">🎂</div>
-                <h1 class="surprise-title">¡Feliz Cumpleaños Alisson!</h1>
-                <h2 class="surprise-subtitle">Mis 18 contigo, mi niña</h2>
-                <p class="surprise-message">
-                    Hoy celebro el día en que llegaste al mundo,<br>
-                    aunque no te conocía aún, ya eras lo mejor que iba a pasarme.<br><br>
-                    Gracias por estos 18 años de existir,<br>
-                    y por permitirme ser parte de tu vida.<br><br>
-                    <strong class="big-love">Ti amo mucho con montones</strong> ❤️
-                </p>
-                <div class="fireworks" id="fireworks"></div>
-                <button class="surprise-btn" id="surpriseBtn">Última sorpresa 🎁</button>
+        <section id="sorpresa" class="sec sec-sorpresa">
+            <div class="surprise">
+                <div class="cake-emoji">🎂</div>
+                <h1>¡Feliz Cumpleaños Alisson!</h1>
+                <h2>Mis 18 contigo, mi niña</h2>
+                <p>Hoy celebro el día en que llegaste al mundo.<br>Gracias por estos 18 años de existir.<br><br><span class="big-love">Ti amo mucho con montones</span> ❤️</p>
+                <button id="surpriseBtn">Última sorpresa 🎁</button>
             </div>
         </section>
     </main>
 
-    <div class="final-overlay hidden" id="finalOverlay">
-        <div class="final-content">
+    <div id="final" class="hidden">
+        <div class="final-box">
             <h1>Alisson</h1>
             <p>Mi niña, mi amor, mi vida</p>
             <p>Eres mi mejor elección, hoy y siempre</p>
-            <p class="final-signature">— Tu niño de silicona ❤️</p>
-            <button class="final-close" id="finalClose">Cerrar</button>
+            <p class="sign">— Tu niño de silicona ❤️</p>
+            <button id="finalClose">Cerrar</button>
         </div>
     </div>
 
-    <audio id="bgMusic" loop preload="auto">
+    <audio id="audio" loop>
         <source src="https://files.catbox.moe/wy6029.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- GSAP + ScrollTrigger (Librería profesional) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
