@@ -660,27 +660,134 @@ body::before {
 .story-content p { color: var(--text-secondary); line-height: 1.6; font-size: 1.05rem; }
 @media (max-width: 768px) { .story-timeline::before { left: 30px; } .story-item, .story-item:nth-child(odd), .story-item:nth-child(even) { flex-direction: row; } .story-icon { width: 60px; height: 60px; font-size: 1.5rem; } .story-content { margin-left: 20px; padding: 20px; } }
 
-/* HEART */
-.heart-container { position: relative; width: 500px; height: 400px; margin: 50px auto; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 30px; }
-.heart-main { position: relative; width: 180px; height: 180px; z-index: 10; animation: heartBeatReal 1.2s ease-in-out infinite; filter: drop-shadow(0 0 40px rgba(255, 107, 157, 0.8)); transition: transform 0.3s; }
-.heart-main svg { width: 100%; height: 100%; }
-@keyframes heartBeatReal {
-    0% { transform: scale(1); }
-    10% { transform: scale(1.15); }
-    20% { transform: scale(1); }
-    30% { transform: scale(1.1); }
-    40% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+/* HEART - LATIDO REALISTA LUB-DUB */
+.heart-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.ecg-line { width: 100%; height: 60px; background: rgba(255, 107, 157, 0.05); border-radius: 10px; overflow: hidden; }
-#ecgPath { stroke-dasharray: 600; stroke-dashoffset: 600; animation: ecgDraw 3s linear infinite; }
-@keyframes ecgDraw { 0% { stroke-dashoffset: 600; } 100% { stroke-dashoffset: 0; } }
-.heart-particles { position: absolute; inset: 0; pointer-events: none; }
-.heart-particle { position: absolute; color: var(--primary-pink); font-size: 1.2rem; animation: floatUp 3s ease-out forwards; filter: drop-shadow(0 0 5px var(--primary-pink)); }
-@keyframes floatUp { 0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; } 100% { transform: translate(var(--tx), var(--ty)) scale(0) rotate(360deg); opacity: 0; } }
-.heart-message { font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--soft-pink); text-align: center; margin-top: 30px; animation: glowPulse 2s ease-in-out infinite; padding: 10px; }
-@media (max-width: 768px) { .heart-container { width: 300px; height: 350px; } .heart-main { width: 130px; height: 130px; } }
+
+.heart-main {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    z-index: 10;
+    filter: drop-shadow(0 0 50px rgba(255, 107, 157, 0.9));
+    animation: heartRealBeat 1.2s ease-in-out infinite;
+    transition: transform 0.3s;
+}
+
+.heart-main svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* LATIDO REALISTA DE CORAZÓN HUMANO (LUB-DUB) */
+@keyframes heartRealBeat {
+    0% { 
+        transform: scale(1); 
+    }
+    8% { 
+        transform: scale(1.12); /* Primer pulso fuerte "LUB" */
+    }
+    16% { 
+        transform: scale(1); 
+    }
+    24% { 
+        transform: scale(1.08); /* Segundo pulso "DUB" más suave */
+    }
+    32% { 
+        transform: scale(1); 
+    }
+    100% { 
+        transform: scale(1); /* Pausa antes del siguiente latido */
+    }
+}
+
+.heart-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.heart-particle {
+    position: absolute;
+    color: var(--primary-pink);
+    font-size: 1.2rem;
+    animation: floatUp 3s ease-out forwards;
+    filter: drop-shadow(0 0 8px var(--primary-pink));
+}
+
+@keyframes floatUp {
+    0% { 
+        transform: translate(0, 0) scale(1) rotate(0deg); 
+        opacity: 1; 
+    }
+    100% { 
+        transform: translate(var(--tx), var(--ty)) scale(0) rotate(360deg); 
+        opacity: 0; 
+    }
+}
+
+/* ONDAS EXPANSIVAS DEL LATIDO */
+.heart-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+}
+
+.heart-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--primary-pink);
+    border-radius: 50%;
+    opacity: 0;
+    animation: ringExpand 1.2s ease-out infinite;
+}
+
+.heart-ring:nth-child(1) { animation-delay: 0s; }
+.heart-ring:nth-child(2) { animation-delay: 0.4s; }
+.heart-ring:nth-child(3) { animation-delay: 0.8s; }
+
+@keyframes ringExpand {
+    0% {
+        width: 200px;
+        height: 200px;
+        opacity: 0.8;
+        border-width: 3px;
+    }
+    100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+        border-width: 1px;
+    }
+}
+
+.heart-message {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: var(--soft-pink);
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .heart-container { width: 300px; height: 350px; }
+    .heart-main { width: 150px; height: 150px; }
+}
+
 
 /* GALLERY */
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1200px; width: 100%; padding: 0 20px; }
