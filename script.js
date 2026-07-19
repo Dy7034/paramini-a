@@ -16,7 +16,7 @@ const CONFIG = {
         { url: 'https://i.imgur.com/lqQtIHe.jpg', title: 'Por siempre', description: 'Lo mejor está por venir' }
     ],
     letter: ['Mi niña,', 'Hay personas que llegan a nuestra vida sin hacer ruido, y poco a poco terminan convirtiéndose en todo. Tú hiciste exactamente eso conmigo.', 'Pienso en aquel 2023, cuando hablamos por primera vez gracias a Masha. Jamás imaginé que serías la mujer que más amo.', 'Después llegó el 15 de tu prima. Yo no sabía bailar, pero todo era más fácil contigo.', 'Cuando te vi pensé que eras muy bonita. Lo único que quería era conocerte más.', 'Con cada conversación, con cada risa, fuiste ocupando un lugar en mi corazón.', 'Me descubrí diciéndome: "Quiero que ella sea mi primer y única novia".', 'Estaba enamorado de tu personalidad, de tus metas.', 'El domingo 12 de abril de 2026 cambió mi vida para siempre.', 'Si me preguntaran mil veces a quién elegiría, la respuesta siempre sería: a ti.', 'Gracias por quedarte.', 'Gracias por cada "Amor", cada "Ti amo", cada foto, cada abrazo.', 'Gracias a ti soy una mejor versión de mí mismo.', 'Tú me has enseñado a amar con paciencia.', 'Un día normal se convierte en el mejor solo porque estás conmigo.', 'Cuando no estamos juntos te extraño muchísimo.', 'Me imagino abrazándote, escuchándote, viendo cómo sonríes.', 'Me encanta cuando me gritas "Amoor", cuando jugamos Crash Team Racing.', 'Esos momentos los quiero recordar siendo viejitos contigo.', 'Gracias por estar a mi lado incluso cuando tenemos diferencias.', 'No soy perfecto, pero jamás dejaré de esforzarme por ti.', 'Quiero verte cumplir tu sueño de ser odontóloga.', 'Quiero viajar contigo, conocer playas y montañas.', 'Y sí, sueño con formar una familia contigo.', 'Eres mi mejor elección.', 'Si algún día dudas de cuánto te amo, recuerda:', 'Te amo muchísimo con montones. ❣️', 'Te amo de aquí a la Luna🌕 a pasito de tortuga🐢, del Sol☀️ al mar🌊 a pasito de calamar🐙. ❣️', 'Gracias por existir.', 'Con todo mi corazón que te ama, hoy, mañana y siempre,', 'Tu niño de silicona ❤️'],
-    reasons: ['Tu sonrisa que ilumina mis días', 'La forma en que dices "Amoor"', 'Tu amor por el queso', 'Cómo te ves cuando duermes', 'Tu risa contagiosa', 'Lo hermosa que eres por dentro y por fuera', 'Cómo me cuidas sin darte cuenta', 'Tus mensajes de "buenos días"', 'Que siempre intentas responderme rápido', 'Lo bien que bailas', 'Tu personalidad única', 'Que me pusiste de fondo de pantalla', 'Cómo escribes mi nombre con corazón', 'Tu valentía para elegir odontología', 'Lo detallista que eres conmigo', 'Tus abrazos que curan todo', 'La forma en que me dices "mi niño"', 'Tu pasión por tus sueños', 'Que eres tú, simplemente tú', 'Lo mucho que te amo, mi niña', 'Y 80 razones más... ❤️'],
+    reasons: ['Tu sonrisa que ilumina mis días', 'La forma en que dices "Amoor"', 'Tu amor por el queso', 'Cómo te ves cuando duermes', 'Tu risa contagiosa', 'Lo hermosa que eres por dentro y por fuera', 'Cómo me cuidas sin darte cuenta', 'Tus mensajes de "buenos días"', 'Que siempre intentas responderme rápido', 'Lo bien que bailas', 'Tu personalidad única', 'Que me pusiste de fondo de pantalla', 'Cómo escribes mi nombre con ', 'Tu valentía para elegir odontología', 'Lo detallista que eres conmigo', 'Tus abrazos que curan todo', 'La forma en que me dices "mi niño"', 'Tu pasión por tus sueños', 'Que eres tú, simplemente tú', 'Lo mucho que te amo, mi niña', 'Y 80 razones más... ❤️'],
     loadMsgs: ['Preparando algo especial para Alisson...', 'Cargando recuerdos hermosos...', 'Creando magia para ti, mi niña...', 'El corazón late por ti...', 'Casi listo para tu sorpresa...', 'El amor se manifiesta...', 'Toques finales de amor...', 'Tu regalo está a punto de aparecer...']
 };
 
@@ -146,49 +146,73 @@ volumeBtn.addEventListener('click', () => {
     else { audio.volume = 0.5; volumeBtn.textContent = '🔊'; }
 });
 
-// CORAZÓN
+// CORAZÓN CON LATIDO REALISTA
 let hci = 0;
-const hcols = ['#ff6b9d', '#9b59b6', '#e74c3c', '#ffb3d1', '#d4af37'];
+const hcols = ['#ff6b9d', '#9b59b6', '#e74c3c', '#ffb3d1', '#d4af37', '#ff4081'];
+
 function initHeart() {
     const heart = document.getElementById('mainHeart');
     if (!heart) return;
+    
+    // Cambiar color cada 2.5 segundos
     setInterval(() => {
         hci = (hci + 1) % hcols.length;
-        const g1 = document.getElementById('grad1'), g2 = document.getElementById('grad2'), g3 = document.getElementById('grad3');
+        const next = hcols[(hci + 1) % hcols.length];
+        const g1 = document.getElementById('grad1');
+        const g2 = document.getElementById('grad2');
+        const g3 = document.getElementById('grad3');
         if (g1) g1.setAttribute('stop-color', hcols[hci]);
-        if (g2) g2.setAttribute('stop-color', hcols[(hci+1) % hcols.length]);
+        if (g2) g2.setAttribute('stop-color', next);
         if (g3) g3.setAttribute('stop-color', hcols[hci]);
         const svg = document.getElementById('heartSvg');
         if (svg) svg.style.filter = `drop-shadow(0 0 50px ${hcols[hci]})`;
-        const ecg = document.getElementById('ecgPath');
-        if (ecg) ecg.setAttribute('stroke', hcols[hci]);
     }, 2500);
+    
+    // Crear ondas expansivas del latido
+    const ringsContainer = document.getElementById('heartRings');
+    if (ringsContainer) {
+        ringsContainer.innerHTML = '<div class="heart-ring"></div><div class="heart-ring"></div><div class="heart-ring"></div>';
+    }
+    
+    // Reacción al mouse
     const c = document.getElementById('heartContainer');
     if (c) {
         c.addEventListener('mousemove', (e) => { 
             const r = heart.getBoundingClientRect(); 
             const x = (e.clientX - r.left - r.width/2) / r.width; 
             const y = (e.clientY - r.top - r.height/2) / r.height; 
-            heart.style.transform = `scale(1.2) translate(${x*20}px, ${y*20}px)`; 
+            heart.style.transform = `scale(1.3) translate(${x*20}px, ${y*20}px)`; 
         });
         c.addEventListener('mouseleave', () => heart.style.transform = 'scale(1)');
+        c.addEventListener('touchstart', (e) => { 
+            heart.style.transform = 'scale(1.3)'; 
+            createHeartParticle(e.touches[0].clientX, e.touches[0].clientY);
+        });
+        c.addEventListener('touchend', () => heart.style.transform = 'scale(1)');
+        
+        // Partículas al ritmo del latido (cada 1.2s)
         setInterval(() => { 
             const r = c.getBoundingClientRect(); 
-            createHeartParticle(r.left + r.width/2 + (Math.random()-0.5)*120, r.top + r.height/2 + (Math.random()-0.5)*120); 
-        }, 400);
+            createHeartParticle(
+                r.left + r.width/2 + (Math.random()-0.5)*150, 
+                r.top + r.height/2 + (Math.random()-0.5)*150
+            ); 
+        }, 1200);
     }
 }
+
 function createHeartParticle(x, y) {
     const p = document.createElement('div'); 
     p.className = 'heart-particle'; 
-    p.innerHTML = '❤';
+    p.innerHTML = ['❤', '💕', '💖', '✨'][Math.floor(Math.random() * 4)];
     p.style.left = x + 'px'; 
     p.style.top = y + 'px';
-    p.style.setProperty('--tx', (Math.random()-0.5)*180 + 'px'); 
-    p.style.setProperty('--ty', -100 - Math.random()*100 + 'px');
+    p.style.setProperty('--tx', (Math.random()-0.5)*200 + 'px'); 
+    p.style.setProperty('--ty', -120 - Math.random()*120 + 'px');
     document.body.appendChild(p); 
     setTimeout(() => p.remove(), 3000);
 }
+
 
 // GALERÍA
 function initGallery() {
