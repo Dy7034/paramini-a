@@ -1,6 +1,6 @@
 /* ============================================
-   💖 PARA ALISSON - SCRIPT DEFINITIVO
-   Versión: 3.0 (Ultra-simplificado)
+   💖 PARA ALISSON - SCRIPT PRINCIPAL
+   Versión: 3.1 (Con fixes de carta y partículas)
    ============================================ */
 
 (function() {
@@ -8,10 +8,6 @@
 
     const $ = (id) => document.getElementById(id);
     const randomInRange = (min, max) => Math.random() * (max - min) + min;
-
-    /* ============================================
-       CONFIGURACIÓN
-       ============================================ */
 
     const CONFIG = {
         startDate: new Date('2026-04-12T00:00:00'),
@@ -115,17 +111,13 @@
         ]
     };
 
-    /* ============================================
-       VARIABLES GLOBALES
-       ============================================ */
-
     let loaderProgress = 0;
     let loaderMessageIndex = 0;
     let loaderInterval = null;
     let lightboxIndex = 0;
     let fireworksActive = false;
     let fireworksTimeout = null;
-    let experienceStarted = false; // ← BANDERA DE CONTROL
+    let experienceStarted = false;
 
     /* ============================================
        LOADER
@@ -182,11 +174,7 @@
        ============================================ */
 
     function startExperience() {
-        // PROTECCIÓN CONTRA LLAMADAS MÚLTIPLES
-        if (experienceStarted) {
-            console.log('⚠️ Experiencia ya iniciada, ignorando');
-            return;
-        }
+        if (experienceStarted) return;
         experienceStarted = true;
         
         console.log('🎉 Iniciando experiencia...');
@@ -199,7 +187,6 @@
         if (main) main.classList.remove('hidden');
         if (musicPlayer) musicPlayer.classList.remove('hidden');
         
-        // Inicializar todo de forma segura
         try {
             initCounter();
             initAmbience();
@@ -348,7 +335,7 @@
     }
 
     /* ============================================
-       CORAZÓN
+       CORAZÓN - CORREGIDO
        ============================================ */
 
     function initHeart() {
@@ -399,17 +386,38 @@
         }, CONFIG.HEART_PARTICLE_INTERVAL_MS);
     }
 
+    /* ============================================
+       PARTICULAS DEL CORAZÓN - CORREGIDO
+       Se posicionan respecto al viewport (fixed)
+       y se ocultan al salir de la pantalla
+       ============================================ */
+
     function createHeartParticle(x, y) {
         const particle = document.createElement('div');
         particle.className = 'heart-particle';
         const emojis = ['❤', '💕', '💖', '✨'];
         particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        
+        // Posición inicial en viewport
         particle.style.left = `${x}px`;
         particle.style.top = `${y}px`;
-        particle.style.setProperty('--tx', `${(Math.random() - 0.5) * 200}px`);
-        particle.style.setProperty('--ty', `${-120 - Math.random() * 120}px`);
+        particle.style.position = 'fixed';
+        
+        // Movimiento aleatorio pero acotado
+        const tx = (Math.random() - 0.5) * 150; // -75 a 75px
+        const ty = -80 - Math.random() * 100;     // -80 a -180px (siempre hacia arriba)
+        
+        particle.style.setProperty('--tx', `${tx}px`);
+        particle.style.setProperty('--ty', `${ty}px`);
+        
         document.body.appendChild(particle);
-        setTimeout(() => particle.remove(), 3000);
+        
+        // Limpieza más agresiva para evitar acumulación
+        setTimeout(() => {
+            if (particle && particle.parentNode) {
+                particle.remove();
+            }
+        }, 3000);
     }
 
     /* ============================================
@@ -496,7 +504,9 @@
     }
 
     /* ============================================
-       CARTA, RAZONES Y CONSTELACIÓN
+       CARTA - CORREGIDA
+       Se crea con un wrapper que permite scroll
+       natural en la página
        ============================================ */
 
     function initLetter() {
@@ -553,10 +563,6 @@
         });
     }
 
-    /* ============================================
-       CARTA SELLADA
-       ============================================ */
-
     function initSealedLetter() {
         const envelope = $('envelope');
         if (!envelope) return;
@@ -610,10 +616,6 @@
         `;
     }
 
-    /* ============================================
-       FIREWORKS
-       ============================================ */
-
     function startFireworks() {
         const container = $('fireworks');
         if (!container || fireworksActive) return;
@@ -654,10 +656,6 @@
         if (container) container.innerHTML = '';
     }
 
-    /* ============================================
-       NAVEGACIÓN
-       ============================================ */
-
     function initNavigation() {
         const navToggle = $('navToggle');
         const navigation = $('navigation');
@@ -681,10 +679,6 @@
         });
     }
 
-    /* ============================================
-       SCROLL PROGRESS
-       ============================================ */
-
     function initScrollProgress() {
         const bar = $('scrollProgress');
         if (!bar) return;
@@ -696,10 +690,6 @@
             bar.style.width = `${percent}%`;
         }, { passive: true });
     }
-
-    /* ============================================
-       CLICK EFFECTS
-       ============================================ */
 
     function initClickEffects() {
         const emojis = ['❤', '✨', '💖', '💕', '⭐', '🌸'];
@@ -719,10 +709,6 @@
             }
         });
     }
-
-    /* ============================================
-       SORPRESA FINAL
-       ============================================ */
 
     function initSurprise() {
         const surpriseBtn = $('surpriseBtn');
@@ -748,10 +734,6 @@
             });
         }
     }
-
-    /* ============================================
-       CURSOR
-       ============================================ */
 
     function initCursor() {
         if (window.innerWidth <= 768) return;
@@ -783,10 +765,6 @@
         }
         animate();
     }
-
-    /* ============================================
-       PARTÍCULAS
-       ============================================ */
 
     function initParticles() {
         const canvas = $('particlesCanvas');
@@ -853,42 +831,26 @@
         animate();
     }
 
-    /* ============================================
-       INICIALIZACIÓN
-       ============================================ */
-
     function init() {
-        console.log('💖 Para Alisson v3.0');
+        console.log('💖 Para Alisson v3.1');
         
-        // Lo que se necesita ANTES del welcome
         initCursor();
         initParticles();
         initNavigation();
         initScrollProgress();
         
-        // VINCULAR BOTÓN DE START - UNA SOLA VEZ
         const startBtn = $('startBtn');
         if (startBtn) {
             startBtn.addEventListener('click', startExperience);
-            console.log('✅ Botón vinculado');
         }
         
-        // Iniciar loader
         setTimeout(startLoader, 500);
     }
-
-    /* ============================================
-       LIMPIEZA
-       ============================================ */
 
     window.addEventListener('beforeunload', () => {
         if (loaderInterval) clearInterval(loaderInterval);
         if (fireworksTimeout) clearTimeout(fireworksTimeout);
     });
-
-    /* ============================================
-       ARRANQUE
-       ============================================ */
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
