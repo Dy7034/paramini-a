@@ -41,6 +41,7 @@
     --shadow-heart: 0 0 50px rgba(255, 107, 157, 0.9);
     --shadow-letter: 0 30px 60px rgba(0, 0, 0, 0.4);
     --shadow-envelope: 0 20px 50px rgba(0, 0, 0, 0.3);
+    --shadow-music-player: 0 10px 30px rgba(0, 0, 0, 0.4);
     
     /* RADIOS */
     --radius-sm: 10px;
@@ -53,7 +54,7 @@
     --transition-normal: 0.3s ease;
     --transition-slow: 0.8s ease;
     
-    /* Z-INDEX SISTEMA (documentado para evitar conflictos) */
+    /* Z-INDEX SISTEMA */
     --z-bg: -3;
     --z-canvas: -2;
     --z-base: 1;
@@ -114,7 +115,6 @@ body::before {
     pointer-events: none;
 }
 
-/* FOCO VISIBLE PARA ACCESIBILIDAD */
 *:focus {
     outline: none;
 }
@@ -384,7 +384,6 @@ button:disabled {
     66% { transform: translate(-20px, 30px) scale(0.95); }
 }
 
-/* PÉTALOS */
 .petal {
     position: absolute;
     top: -20px;
@@ -404,7 +403,6 @@ button:disabled {
     100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
 }
 
-/* LUCES AMBIENTALES */
 .light {
     position: absolute;
     width: 200px;
@@ -425,7 +423,6 @@ button:disabled {
     50% { transform: translate(30px, -30px); }
 }
 
-/* MARIPOSAS */
 .butterfly {
     position: absolute;
     font-size: 1.5rem;
@@ -583,6 +580,7 @@ button:disabled {
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     animation: btnShine 3s infinite;
+    pointer-events: none;
 }
 
 @keyframes btnShine {
@@ -689,7 +687,7 @@ button:disabled {
 }
 
 /* ============================================
-   REPRODUCTOR DE MÚSICA
+   REPRODUCTOR DE MÚSICA - CORREGIDO
    ============================================ */
 
 .music-player {
@@ -700,13 +698,13 @@ button:disabled {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 8px 12px;
+    border-radius: 50px;
+    padding: 10px 16px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     z-index: var(--z-music);
-    max-width: calc(100% - 30px);
+    box-shadow: var(--shadow-music-player);
     animation: slideInUp 0.5s ease 0.5s both;
 }
 
@@ -719,7 +717,8 @@ button:disabled {
     display: flex;
     align-items: center;
     gap: 2px;
-    height: 20px;
+    height: 18px;
+    flex-shrink: 0;
 }
 
 .music-visualizer span {
@@ -747,41 +746,60 @@ button:disabled {
 
 .music-info {
     min-width: 100px;
+    line-height: 1.2;
 }
 
 .music-title {
     font-size: 0.8rem;
     color: white;
     font-weight: 500;
+    margin: 0;
 }
 
 .music-artist {
     font-size: 0.7rem;
     color: var(--text3);
+    margin: 0;
 }
 
 .music-controls {
     display: flex;
     gap: 6px;
+    align-items: center;
 }
 
+/* BOTONES DE MÚSICA - ESTILOS CORREGIDOS */
 .music-btn {
-    width: 32px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.1);
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    background: rgba(255, 255, 255, 0.12);
     border: 1px solid var(--border);
     border-radius: 50%;
     color: white;
-    font-size: 0.75rem;
-    transition: all 0.2s ease;
-    display: flex;
+    font-size: 0.85rem;
+    line-height: 1;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+    font-family: 'Segoe UI Symbol', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
 }
 
 .music-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 107, 157, 0.3);
+    border-color: var(--primary-pink);
     transform: scale(1.1);
+}
+
+.music-btn:active {
+    transform: scale(0.95);
+}
+
+.music-btn:focus-visible {
+    outline: 2px solid var(--primary-pink);
+    outline-offset: 2px;
 }
 
 /* ============================================
@@ -799,7 +817,6 @@ button:disabled {
     z-index: var(--z-content);
 }
 
-/* BACKGROUNDS DE SECCIONES (CORREGIDO: ahora coinciden con HTML) */
 .sec-tiempo { background: rgba(155, 89, 182, 0.05); }
 .sec-corazon { background: rgba(231, 76, 60, 0.08); }
 .sec-carta { background: rgba(255, 215, 0, 0.05); }
@@ -1071,6 +1088,7 @@ button:disabled {
     width: 180px;
     height: 180px;
     pointer-events: none;
+    z-index: 5;
 }
 
 .heart-ring {
@@ -1098,16 +1116,19 @@ button:disabled {
     position: absolute;
     inset: 0;
     pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .heart-particle {
-    position: absolute;
+    position: fixed;
     color: var(--primary-pink);
     font-size: 1.2rem;
     animation: floatUp 3s ease-out forwards;
     pointer-events: none;
     user-select: none;
     will-change: transform, opacity;
+    z-index: 5;
 }
 
 @keyframes floatUp {
@@ -1192,7 +1213,6 @@ button:disabled {
     color: var(--text2);
 }
 
-/* LIGHTBOX */
 .lightbox {
     position: fixed;
     inset: 0;
@@ -1288,33 +1308,34 @@ button:disabled {
 .lightbox-next:hover { transform: translateY(-50%) scale(1.1); }
 
 /* ============================================
-   CARTA
+   CARTA - CORREGIDA
    ============================================ */
 
 .letter-container {
     max-width: 700px;
+    width: 100%;
     margin: 0 auto;
+    padding: 20px 0;
 }
 
 .letter {
     background: linear-gradient(135deg, #fff5f7, #ffe0ec, #ffd1dc);
     border-radius: 20px;
-    padding: 50px 40px;
+    padding: 60px 50px;
     box-shadow: var(--shadow-letter);
     color: #4a1942;
-    max-height: 70vh;
-    overflow-y: auto;
     position: relative;
     border: 2px solid rgba(212, 175, 55, 0.3);
 }
 
+/* ELIMINADO max-height y overflow para que la carta crezca naturalmente */
 .letter::before {
     content: '';
     position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
     border: 1px solid rgba(212, 175, 55, 0.4);
     border-radius: 10px;
     pointer-events: none;
@@ -1322,11 +1343,12 @@ button:disabled {
 
 .letter-seal {
     position: absolute;
-    top: -20px;
-    right: 25px;
-    font-size: 2.5rem;
+    top: -25px;
+    right: 30px;
+    font-size: 3rem;
     animation: wiggle 3s infinite;
     z-index: 2;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
 }
 
 @keyframes wiggle {
@@ -1336,39 +1358,30 @@ button:disabled {
 
 .letter-content {
     font-family: 'Dancing Script', cursive;
-    font-size: 1.3rem;
-    line-height: 1.8;
+    font-size: 1.4rem;
+    line-height: 1.9;
+    text-align: left;
 }
 
 .letter-content p {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
+    text-indent: 20px;
+}
+
+.letter-content p:first-child {
+    text-indent: 0;
+    font-size: 1.6rem;
+    color: #8e3b5c;
+    margin-bottom: 25px;
 }
 
 .letter-content p.signature {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     text-align: right;
     color: #8e3b5c;
     font-weight: 700;
-    margin-top: 20px;
-}
-
-/* SCROLLBAR PERSONALIZADO PARA LA CARTA */
-.letter::-webkit-scrollbar {
-    width: 8px;
-}
-
-.letter::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-}
-
-.letter::-webkit-scrollbar-thumb {
-    background: var(--primary-pink);
-    border-radius: 4px;
-}
-
-.letter::-webkit-scrollbar-thumb:hover {
-    background: #ff8fb5;
+    margin-top: 30px;
+    text-indent: 0;
 }
 
 /* ============================================
@@ -1738,6 +1751,7 @@ button:disabled {
     color: var(--soft-pink);
     font-style: italic;
     margin-top: 15px;
+    transition: color 0.3s ease;
 }
 
 .future-letter-content {
@@ -1996,10 +2010,6 @@ button:disabled {
     border-color: var(--primary-pink);
 }
 
-/* ============================================
-   EFECTOS DE CLICK
-   ============================================ */
-
 .click-effect {
     position: fixed;
     pointer-events: none;
@@ -2075,10 +2085,6 @@ button:disabled {
     50%, 100% { left: 100%; }
 }
 
-.pulse-icon {
-    /* Definida en story-icon */
-}
-
 /* ============================================
    SCROLLBAR GLOBAL
    ============================================ */
@@ -2110,12 +2116,12 @@ button:disabled {
     .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 15px; }
     .dreams-container { grid-template-columns: repeat(2, 1fr); }
     .reasons-container { grid-template-columns: repeat(2, 1fr); }
-    .letter { padding: 40px 30px; }
+    .letter { padding: 50px 40px; }
     .counter-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ============================================
-   RESPONSIVE - MOBILE GRANDE
+   RESPONSIVE - MOBILE GRANDE - CORREGIDO
    ============================================ */
 
 @media (max-width: 768px) {
@@ -2129,10 +2135,40 @@ button:disabled {
     .navigation { top: 60px; right: 10px; max-width: calc(100% - 20px); }
     .navigation a { font-size: 0.8rem; padding: 6px 10px; }
     
-    .music-player { bottom: 10px; right: 10px; left: 10px; max-width: none; padding: 6px 10px; }
-    .music-info { min-width: 80px; }
-    .music-title { font-size: 0.7rem; }
-    .music-btn { width: 28px; height: 28px; font-size: 0.7rem; }
+    /* === MUSIC PLAYER EN MÓVIL - CORREGIDO === */
+    .music-player {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        gap: 8px;
+        border-radius: 25px;
+    }
+    
+    .music-visualizer {
+        height: 16px;
+    }
+    
+    .music-info {
+        min-width: 80px;
+        flex: 1;
+    }
+    
+    .music-title {
+        font-size: 0.75rem;
+    }
+    
+    .music-artist {
+        font-size: 0.65rem;
+    }
+    
+    /* BOTONES DE MÚSICA EN MÓVIL - CORREGIDOS */
+    .music-btn {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        font-size: 0.8rem;
+    }
     
     .welcome-title { font-size: 1.8rem; }
     .welcome-subtitle { font-size: 1.1rem; }
@@ -2177,10 +2213,36 @@ button:disabled {
     .lightbox-prev { left: 10px; }
     .lightbox-next { right: 10px; }
     
-    .letter { padding: 30px 20px; }
-    .letter-content { font-size: 1.1rem; line-height: 1.7; }
-    .letter-content p.signature { font-size: 1.3rem; }
-    .letter-seal { font-size: 2rem; right: 15px; }
+    /* CARTA EN MÓVIL - CORREGIDA */
+    .letter { 
+        padding: 40px 25px; 
+        border-radius: 15px;
+    }
+    .letter::before {
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+    }
+    .letter-content { 
+        font-size: 1.2rem; 
+        line-height: 1.8; 
+    }
+    .letter-content p {
+        text-indent: 15px;
+        margin-bottom: 15px;
+    }
+    .letter-content p:first-child { 
+        font-size: 1.4rem;
+    }
+    .letter-content p.signature { 
+        font-size: 1.4rem; 
+    }
+    .letter-seal { 
+        font-size: 2.2rem; 
+        right: 20px; 
+        top: -20px;
+    }
     
     .reasons-container { grid-template-columns: 1fr; padding: 0 10px; }
     .reason-card { padding: 15px; }
@@ -2225,7 +2287,7 @@ button:disabled {
 }
 
 /* ============================================
-   RESPONSIVE - MOBILE PEQUEÑO
+   RESPONSIVE - MOBILE PEQUEÑO - CORREGIDO
    ============================================ */
 
 @media (max-width: 480px) {
@@ -2241,12 +2303,51 @@ button:disabled {
         border-right-width: 125px;
         border-top-width: 85px;
     }
+    
+    /* MUSIC PLAYER EN PANTALLAS MUY PEQUEÑAS */
+    .music-player {
+        padding: 6px 10px;
+        gap: 6px;
+    }
+    
+    .music-info {
+        min-width: 70px;
+    }
+    
+    .music-title {
+        font-size: 0.7rem;
+    }
+    
+    .music-artist {
+        font-size: 0.6rem;
+    }
+    
+    .music-btn {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        font-size: 0.7rem;
+    }
+    
+    /* CARTA EN PANTALLAS MUY PEQUEÑAS */
+    .letter {
+        padding: 35px 20px;
+    }
+    .letter-content {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+    .letter-content p {
+        text-indent: 10px;
+        margin-bottom: 12px;
+    }
+    .letter-content p:first-child {
+        font-size: 1.3rem;
+    }
 }
 
 /* ============================================
    ACCESIBILIDAD - PREFERS REDUCED MOTION
-   CRÍTICO: Desactiva animaciones para usuarios 
-   con sensibilidad al movimiento
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
